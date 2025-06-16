@@ -1,0 +1,73 @@
+package com.User.User.security;
+
+
+
+// Custom authentication filter extending Spring Security's UsernamePasswordAuthenticationFilter
+public class MyAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    // Constructor to initialize with authentication manager
+    public MyAuthenticationFilter(AuthenticationManager authenticationManager) {
+        super(authenticationManager); // Set the authentication manager
+    }
+
+    // Attempt authentication when login request is received
+    @SneakyThrows // Handle checked exceptions like IOException silently
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) {
+        // Read login credentials (email and password) from the request body
+        LoginRequestModel creds = new ObjectMapper().readValue(req.getInputStream(), LoginRequestModel.class);
+
+        // Return an authentication token with email and password (authorities list is empty here)
+        return getAuthenticationManager()
+                .authenticate(new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getPassword(), new ArrayList<>()));
+    }
+
+    // On successful authentication, generate and return a JWT token
+    @Override
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        // Get the authenticated user's email (used as username in Spring Security)
+        String userEmail = ((User)authResult.getPrincipal()).getUsername();
+
+        // Get the user details (UserDto) from the service layer using email
+        UserDto userDto = ((UserService)SpringApplicationContext.getBean("userServiceImpl"))
+                .getUserDetailsBYEmail(userEmail);
+
+        // Get the secret key for signing the JWT
+        String commonKey = SecurityConstants.getSecretToken();
+
+        // Create the signing key using the secret
+        SecretKey secretKey = Keys.hmacShaKeyFor(commonKey.getBytes());
+
+        // Build the JWT token with user ID, expiry time, issue time, and sign it with the key
+        String token = Jwts.builder()
+                .subject(userDto.getUserId()) // Set subject as user ID
+                .expiration(Date.from(Instant.now().plusMillis(Long.parseLong(SecurityConstants.getTokenExpirationTime())))) // Set expiry
+                .issuedAt(Date.from(Instant.now())) // Set issue time
+                .signWith(secretKey) // Sign the token
+                .compact(); // Compact into a JWT string
+
+        // Add the JWT token to the response header (used by frontend for future requests)
+        res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
+
+        // Also return the user ID in a separate header (optional, used by frontend if needed)
+        res.addHeader(SecurityConstants.USER_ID, userDto.getUserId());
+    }
+}
+
+
+//        http.csrf(csrf->csrf.disable());
+//
+//              http  .authorizeHttpRequests(authz -> authz
+//                        .requestMatchers(new AntPathRequestMatcher("/users/**")).permitAll()
+//
+//
+////                        .requestMatchers(new AntPathRequestMatcher("/users/h2-console/**")).permitAll()
+//
+//                ).addFilter(new MyAuthenticationFilter(authenticationManager,userService,environment))
+//                      .addFilter(new AuthorizationFilter(authenticationManager,environment))
+//                      .authenticationManager(authenticationManager)
+//                      .sessionManagement(session->session
+//                      .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+               //http.formLogin(Customizer.withDefaults());
+//               http.httpBasic(Customizer.withDefaults());
