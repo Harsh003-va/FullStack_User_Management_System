@@ -1,0 +1,89 @@
+<div class="about-page">
+  <div class="about-container">
+    <!-- Animated Photo Section -->
+    <div class="photo-container">
+      <div class="photo-wrapper">
+        <img
+          src="assets/images/About.png"
+          alt="Harsh Attigeri"
+          class="profile-photo"
+          [@photoAnimation]
+        />
+        <div class="photo-border"></div>
+        <div class="photo-dots"></div>
+      </div>
+    </div>
+
+    <!-- Information Section -->
+    <div class="info-container" [@textAnimation]>
+      <h1 class="about-title">Hello, I'm <span>Harsh Attigeri</span></h1>
+      <h3 class="about-subtitle">Full Stack Java Developer</h3>
+
+      <div class="about-content">
+        <p [@paragraphAnimation]>
+          I'm a passionate developer based in Hyderabad, India, with expertise
+          in Angular, React, Java, Spring Boot and modern web technologies. I
+          love creating intuitive user experiences and solving complex problems
+          with clean, efficient code.
+        </p>
+
+        <p [@paragraphAnimation]>
+          When I'm not coding, you can find me exploring new tech trends,
+          contributing to open-source projects, or mentoring aspiring
+          developers. My goal is to build applications that make people's lives
+          easier and more enjoyable.
+        </p>
+
+        <div class="skills-section" [@skillsAnimation]>
+          <h4>My Skills</h4>
+          <div class="skills-list">
+            <span
+              class="skill-bubble"
+              *ngFor="let skill of skills; let i = index"
+              [@skillBubbleAnimation]="{
+                value: '',
+                params: { delay: i * 100 }
+              }"
+            >
+              {{ skill }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="social-links" [@socialLinksAnimation]>
+        <a
+          href="https://hvaportfolio.netlify.app/"
+          target="_blank"
+          class="social-icon"
+          [@socialIconAnimation]="{ value: '', params: { delay: 0 } }"
+        >
+          <i class="fas fa-globe"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/in/harshavardhan-atigeri"
+          target="_blank"
+          class="social-icon"
+          [@socialIconAnimation]="{ value: '', params: { delay: 100 } }"
+        >
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a
+          href="https://github.com/Harsh003-va"
+          target="_blank"
+          class="social-icon"
+          [@socialIconAnimation]="{ value: '', params: { delay: 200 } }"
+        >
+          <i class="fab fa-github"></i>
+        </a>
+        <a
+          href="mailto:harsh.attigeri@gmail.com"
+          class="social-icon"
+          [@socialIconAnimation]="{ value: '', params: { delay: 300 } }"
+        >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

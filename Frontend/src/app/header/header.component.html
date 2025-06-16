@@ -1,0 +1,33 @@
+<!-- header.component.html -->
+<header class="main-header">
+  <a routerLink="/" class="logo">Todo<span>App</span></a>
+
+  <nav class="navigation">
+    <a
+      [routerLink]="['/welcome', name]"
+      [queryParams]="{ id: userId }"
+      routerLinkActive="active"
+      >Welcome</a
+    >
+
+    <!-- Protected links -->
+    <ng-container *ngIf="isLoggedIn()">
+      <a
+        [routerLink]="['/todos', name]"
+        [queryParams]="{ id: userId }"
+        routerLinkActive="active"
+        >Todo</a
+      >
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a (click)="logout()" class="btn-login">Logout</a>
+    </ng-container>
+
+    <!-- Auth links -->
+    <ng-container *ngIf="!isLoggedIn()">
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+      <a routerLink="/login" class="btn-login" routerLinkActive="active"
+        >Login</a
+      >
+    </ng-container>
+  </nav>
+</header>

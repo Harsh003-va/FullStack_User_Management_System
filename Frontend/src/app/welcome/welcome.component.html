@@ -1,0 +1,46 @@
+<div class="welcome-container">
+  <div class="welcome-content">
+    <div class="welcome-text animate__animated animate__fadeIn">
+      <h1 class="greeting">Welcome<span class="dot">.</span></h1>
+      <h2 class="username">{{ urlName }}</h2>
+      <p class="tagline">Manage Your Todos Like A Pro</p>
+
+      <div
+        class="cta-container animate__animated animate__fadeInUp animate__delay-1s"
+      >
+        <a
+          class="cta-button"
+          [routerLink]="['/todos', urlName]"
+          [queryParams]="{ id: userId }"
+        >
+          Get Started
+          <svg class="arrow-icon" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="welcome-image animate__animated animate__fadeInRight">
+      <img src="assets/todo-illustration.svg" alt="Todo illustration" />
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <h3>Organize</h3>
+      <p>Keep all your tasks in one place</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Prioritize</h3>
+      <p>Focus on what matters most</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✅</div>
+      <h3>Complete</h3>
+      <p>Celebrate your accomplishments</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div
+  *ngIf="!isLoginSucess"
+  @fadeInOut
+  class="alert alert-warning alert-dismissible fade show"
+>
+  UserName or Password is not correct
+  <button
+    type="button"
+    class="btn-close"
+    (click)="isLoginSucess = true"
+  ></button>
+</div>
+
+<div class="container-fluid">
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <!-- Left Column with Animated Image -->
+        <div class="col-md-8 col-lg-7 col-xl-6" @slideInLeft>
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="img-fluid floating-img"
+            alt="Login illustration"
+          />
+        </div>
+
+        <!-- Right Column with Login Form -->
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" @slideInRight>
+          <div class="card shadow-lg rounded-4">
+            <div class="card-body p-5">
+              <h2 class="text-center mb-4 fw-bold text-gradient">
+                Welcome Back
+              </h2>
+
+              <form>
+                <!-- Email Input -->
+                <div data-mdb-input-init class="form-outline mb-4" @floatIn>
+                  <input
+                    type="email"
+                    name="email"
+                    [(ngModel)]="email"
+                    id="form1Example13"
+                    class="form-control form-control-lg"
+                  />
+                  <label class="form-label" for="form1Example13">
+                    <i class="fas fa-envelope me-2"></i>Email address
+                  </label>
+                </div>
+
+                <!-- Password Input -->
+                <div data-mdb-input-init class="form-outline mb-4" @floatIn>
+                  <input
+                    [(ngModel)]="password"
+                    name="password"
+                    type="password"
+                    id="form1Example23"
+                    class="form-control form-control-lg"
+                  />
+                  <label class="form-label" for="form1Example23">
+                    <i class="fas fa-lock me-2"></i>Password
+                  </label>
+                </div>
+
+                <!-- Remember me & Forgot password -->
+                <div
+                  class="d-flex justify-content-between align-items-center mb-4"
+                  @fadeIn
+                >
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="form1Example3"
+                    />
+                    <label class="form-check-label" for="form1Example3">
+                      Remember me
+                    </label>
+                  </div>
+                  <a href="#!">Forgot password?</a>
+                </div>
+
+                <!-- Submit button -->
+                <button
+                  (click)="handleLogin()"
+                  type="submit"
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn btn-primary btn-lg btn-block d-block mx-auto mb-4 pulse-on-hover"
+                  @pulse
+                >
+                  Sign in
+                </button>
+
+                <!-- Divider -->
+                <div class="divider d-flex align-items-center my-4" @fadeIn>
+                  <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                </div>
+
+                <!-- Social buttons -->
+                <div class="text-center" @staggerIn>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                  </button>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                  </button>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

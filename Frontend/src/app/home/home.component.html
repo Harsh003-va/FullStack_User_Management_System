@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2>User Data</h2>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <!-- Add more headers as per your user model -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ user.userId }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.email }}</td>
+        <!-- Add more fields as per your user model -->
+      </tr>
+    </tbody>
+  </table>
+</div>

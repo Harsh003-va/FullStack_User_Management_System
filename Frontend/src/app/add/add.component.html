@@ -1,0 +1,147 @@
+<div class="container animated-entry">
+  <div class="card todo-card glow-hover">
+    <div class="card-header gradient-header">
+      <h2 class="mb-0">Add New Todo</h2>
+      <div class="header-bar"></div>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="addTodo()" class="needs-validation" novalidate>
+        <div
+          class="form-group floating-label"
+          [@fieldState]="getFieldState(newTodo.name)"
+        >
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="newTodo.name"
+            name="name"
+            required
+            placeholder=" "
+          />
+          <label for="name">Task Name</label>
+          <div class="invalid-feedback animated-feedback">
+            Please provide a task name
+          </div>
+          <div class="focus-line"></div>
+        </div>
+
+        <div
+          class="form-group floating-label"
+          [@fieldState]="getFieldState(newTodo.description)"
+        >
+          <textarea
+            class="form-control"
+            id="description"
+            [(ngModel)]="newTodo.description"
+            name="description"
+            required
+            placeholder=" "
+            rows="3"
+          ></textarea>
+          <label for="description">Description</label>
+          <div class="invalid-feedback animated-feedback">
+            Please provide a description
+          </div>
+          <div class="focus-line"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <div
+              class="form-group floating-label"
+              [@fieldState]="getFieldState(newTodo.price)"
+            >
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                [(ngModel)]="newTodo.price"
+                name="price"
+                required
+                placeholder=" "
+                step="0.01"
+                min="0"
+              />
+              <label for="price">Price (₹)</label>
+              <div class="invalid-feedback animated-feedback">
+                Please provide a valid price
+              </div>
+              <div class="focus-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="form-group floating-label"
+              [@fieldState]="getFieldState(newTodo.manufactureTime)"
+            >
+              <input
+                type="date"
+                class="form-control"
+                id="manufactureTime"
+                [ngModel]="newTodo.manufactureTime | date : 'yyyy-MM-dd'"
+                (ngModelChange)="newTodo.manufactureTime = $event"
+                name="manufactureTime"
+                required
+                placeholder=" "
+              />
+              <label for="manufactureTime">Manufacture Date</label>
+              <div class="invalid-feedback animated-feedback">
+                Please select a manufacture date
+              </div>
+              <div class="focus-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="form-group floating-label"
+          [@fieldState]="getFieldState(newTodo.expTime)"
+        >
+          <input
+            type="date"
+            class="form-control"
+            id="expTime"
+            [ngModel]="newTodo.expTime | date : 'yyyy-MM-dd'"
+            (ngModelChange)="newTodo.expTime = $event"
+            name="expTime"
+            required
+            placeholder=" "
+          />
+          <label for="expTime">Due Date</label>
+          <div class="invalid-feedback animated-feedback">
+            Please select a due date
+          </div>
+          <div class="focus-line"></div>
+        </div>
+
+        <div class="button-group">
+          <button
+            type="submit"
+            class="btn btn-submit btn-lg"
+            [disabled]="!newTodo.name || !newTodo.description"
+            [@buttonState]="
+              !newTodo.name || !newTodo.description ? 'disabled' : 'active'
+            "
+          >
+            <span class="btn-content">
+              <i class="fas fa-plus mr-2"></i>Add Task
+            </span>
+            <span class="btn-wave"></span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-cancel btn-lg"
+            (click)="cancel()"
+            [@buttonState]="'active'"
+          >
+            <span class="btn-content">
+              <i class="fas fa-times mr-2"></i>Cancel
+            </span>
+            <span class="btn-wave"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

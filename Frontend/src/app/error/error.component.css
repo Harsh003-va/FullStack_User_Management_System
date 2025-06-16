@@ -1,0 +1,67 @@
+.cute-error-wrapper {
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to top right, #fff5ec, #fcefe8);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bear-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.error-title {
+    font-size: 2.2rem;
+    color: #4b2e2e;
+    margin-bottom: 10px;
+}
+
+.error-text {
+    font-size: 1.1rem;
+    color: #6c4c4c;
+    margin-bottom: 25px;
+    max-width: 480px;
+}
+
+.return-btn {
+    background-color: #ff9553;
+    color: white;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.return-btn:hover {
+    background-color: #f77a38;
+    transform: scale(1.05);
+}
+
+/* Floating animation */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

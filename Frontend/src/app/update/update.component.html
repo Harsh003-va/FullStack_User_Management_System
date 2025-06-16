@@ -1,0 +1,120 @@
+<div class="container animated-entry">
+  <div class="card todo-card glow-hover">
+    <div class="card-header gradient-header">
+      <h2 class="mb-0">Update Todo</h2>
+      <div class="header-bar"></div>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="updateTodo()" class="needs-validation" novalidate>
+        <div
+          class="form-group floating-label"
+          [@fieldState]="getFieldState(todo.name)"
+        >
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="todo.name"
+            name="name"
+            required
+            placeholder=" "
+          />
+          <label for="name">Task Name</label>
+          <div class="invalid-feedback animated-feedback">
+            Please provide a task name
+          </div>
+          <div class="focus-line"></div>
+        </div>
+
+        <div
+          class="form-group floating-label"
+          [@fieldState]="getFieldState(todo.description)"
+        >
+          <textarea
+            class="form-control"
+            id="description"
+            [(ngModel)]="todo.description"
+            name="description"
+            required
+            placeholder=" "
+            rows="3"
+          ></textarea>
+          <label for="description">Description</label>
+          <div class="invalid-feedback animated-feedback">
+            Please provide a description
+          </div>
+          <div class="focus-line"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-6">
+            <div
+              class="form-group floating-label"
+              [@fieldState]="getFieldState(todo.price)"
+            >
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                [(ngModel)]="todo.price"
+                name="price"
+                required
+                placeholder=" "
+                step="0.01"
+                min="0"
+              />
+              <label for="price">Price ($)</label>
+              <div class="invalid-feedback animated-feedback">
+                Please provide a valid price
+              </div>
+              <div class="focus-line"></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div
+              class="form-group floating-label"
+              [@fieldState]="getFieldState(todo.expTime)"
+            >
+              <input
+                type="date"
+                class="form-control"
+                id="expTime"
+                [ngModel]="todo.expTime | date : 'yyyy-MM-dd'"
+                (ngModelChange)="todo.expTime = $event"
+                name="expTime"
+                required
+                placeholder=" "
+              />
+              <label for="expTime">Due Date</label>
+              <div class="invalid-feedback animated-feedback">
+                Please select a due date
+              </div>
+              <div class="focus-line"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg btn-raise"
+            [disabled]="!todo.name || !todo.description"
+            [@buttonState]="
+              !todo.name || !todo.description ? 'disabled' : 'active'
+            "
+          >
+            <i class="fas fa-save mr-2"></i>Update Task
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-lg btn-raise ml-3"
+            (click)="cancel()"
+            [@buttonState]="'active'"
+          >
+            <i class="fas fa-times mr-2"></i>Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

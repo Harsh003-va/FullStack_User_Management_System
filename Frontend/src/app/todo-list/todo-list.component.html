@@ -1,0 +1,48 @@
+<h1 class="heading">My Todo's</h1>
+<div class="alert alert-success" *ngIf="deleteMessage.length > 0">
+  {{ deleteMessage }}
+</div>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Deadline</th>
+        <th>Amount</th>
+        <th>Action</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos">
+        <td>{{ todo.todoId }}</td>
+        <td>{{ todo.name }}</td>
+        <td>{{ todo.description }}</td>
+        <td>{{ todo.expTime }}</td>
+        <td>{{ todo.price | currency : "INR" : "symbol" : "1.2-2" }}</td>
+        <td>
+          <button
+            class="btn btn-warning"
+            (click)="deleteTodo(todo.todoId)"
+          ></button
+          >Delete
+        </td>
+        <td>
+          <button
+            class="btn btn-primary"
+            (click)="updateTodo(todo.todoId)"
+          ></button
+          >Update
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-todo-container">
+    <button class="btn btn-success" (click)="navigateToAddTodo()">
+      Add Todo
+    </button>
+  </div>
+</div>
